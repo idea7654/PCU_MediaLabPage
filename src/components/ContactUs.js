@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 
-function ContactUs() {
+function ContactUs({ setShowModal }) {
     let navigate = useNavigate();
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -12,6 +12,7 @@ function ContactUs() {
     function returnMain(e) {
         e.preventDefault();
         navigate('/');
+        setShowModal(true);
     }
 
     function sendEmail(e) {

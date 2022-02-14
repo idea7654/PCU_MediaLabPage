@@ -1,12 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-function About() {
+function About({ setShow }) {
     let navigate = useNavigate();
     const [showModal, setShowModal] = React.useState(false);
     const [sub1Title, setSub1Title] = React.useState('1월 정기 성과발표회');
     function returnMain(e) {
         e.preventDefault();
         navigate('/');
+        setShow(true);
     }
 
     return (

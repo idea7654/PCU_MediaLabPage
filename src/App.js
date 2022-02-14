@@ -3,6 +3,8 @@ import About from './components/About';
 import React from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import ContactUs from './components/ContactUs';
+import Recruit from './components/Recruit';
+import NotFound from './components/NotFound';
 
 function App() {
     let navigate = useNavigate();
@@ -10,13 +12,15 @@ function App() {
 
     React.useEffect(() => {
         setShowModal(true);
-    }, []);
+    }, [setShowModal]);
     return (
         <div>
             <Routes>
                 <Route path="/" element={<Landing />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/about" element={<About setShow={setShowModal} />} />
+                <Route path="/contact" element={<ContactUs setShowModal={setShowModal} />} />
+                <Route path="/recruit" element={<Recruit setShowModal={setShowModal} />} />
+                <Route element={NotFound} />
             </Routes>
             <div className="bg-gray-900">
                 <div className="max-w-2xl mx-auto text-white py-8">
@@ -63,12 +67,15 @@ function App() {
                                         </button>
                                     </div>
                                     {/*body*/}
-                                    <div className="relative p-6 flex-auto">
-                                        <p className="my-4 text-blueGray-500 text-2xl leading-relaxed">
-                                            MultiMedia_Lab에서 2022년도 1학기 신규인원을 모집하고 있습니다.
-                                            <br></br>
-                                            신청기간은
-                                        </p>
+                                    <div
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setShowModal(false);
+                                            navigate('/recruit');
+                                        }}
+                                        className="relative p-6 flex-auto flex justify-center"
+                                    >
+                                        <img width={'50%'} src={`${process.env.PUBLIC_URL}/poster.png`} />
                                     </div>
                                     {/*footer*/}
                                     <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
